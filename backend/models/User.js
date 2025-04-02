@@ -1,14 +1,25 @@
 const mongoose = require("mongoose");
 
-const userSchema = new mongoose.Schema(
-  {
-    name: { type: String, required: true },
-    email: { type: String, required: true, unique: true },
-    password: { type: String, required: true },
-    role: { type: String, enum: ["user", "business"], default: "user" }, // Role-based access
-  },
-  { timestamps: true }
-);
+const financialSchema = {
+  revenue: [Number],
+  CAGR: Number,
+  profitMargin: Number,
+  ROI: Number,
+  customerRetentionRate: Number,
+};
 
-const User = mongoose.model("User", userSchema);
-module.exports = User;
+const userSchema = new mongoose.Schema({
+  name: String,
+  email: { type: String, unique: true },
+  password: String,
+  role: { type: String, enum: ["general", "business"], default: "general" },
+  description: String,
+  contactDetails: String,
+  businessType: String,
+  location: String,
+  products: [{ type: mongoose.Schema.Types.ObjectId, ref: "Product" }],
+  financials: financialSchema,
+  messages: [{ type: mongoose.Schema.Types.ObjectId, ref: "Message" }],
+});
+
+module.exports = mongoose.model("User", userSchema);
