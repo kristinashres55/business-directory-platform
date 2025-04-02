@@ -42,22 +42,39 @@ exports.getFinancials = async (req, res) => {
 };
 
 // Update Financial Data (Business only)
+// Update Financial Data (Business only)
 exports.updateFinancials = async (req, res) => {
   try {
     const business = await User.findById(req.params.businessId);
+
     if (!business || business.role !== "business") {
       return res.status(404).json({ message: "Business not found" });
     }
 
+    // Authorization check: Only the owner can update
     if (req.user._id.toString() !== req.params.businessId) {
       return res.status(401).json({ message: "Not authorized" });
     }
 
-    business.financials = req.body.financials;
+    // Update specific fields if provided
+    const { year, amount, cagr, profitMargin, roi, customerRetentionRate } =
+      req.body;
+
+    if (cagr !== undefined) business.financials.cagr = cagr;
+    if (profitMargin !== undefined)
+      business.financials.profitMargin = profitMargin;
+    if (roi !== undefined) business.financials.roi = roi;
+    if (customerRetentionRate !== undefined)
+      business.financials.customerRetentionRate = customerRetentionRate;
+
+    if (year && amount) {
+      business.financials.revenue.push({ year, amount });
+    }
+
     await business.save();
 
     res.json({
-      message: "Financial data updated",
+      message: "Financial data updated successfully",
       financials: business.financials,
     });
   } catch (error) {
