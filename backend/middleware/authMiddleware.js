@@ -24,7 +24,9 @@ const businessOnly = (req, res, next) => {
   if (req.user && req.user.role === "business") {
     next();
   } else {
-    res.status(403).json({ message: "Access restricted to business users" });
+    return res
+      .status(403)
+      .json({ message: "Access restricted to business users" });
   }
 };
 
