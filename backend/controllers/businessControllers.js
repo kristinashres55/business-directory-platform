@@ -27,9 +27,25 @@ const createBusiness = async (req, res) => {
 // @access Public
 const getBusinesses = async (req, res) => {
   try {
-    const businesses = await Business.find({ role: "business" }).select(
-      "-password"
-    );
+    const { type, location, minRevenue, maxRevenue, sortBy } = req.query;
+    let filter = { role: "business" };
+
+    if (type) filter.businessType = type;
+    if (location) filter.location = location;
+    if (minRevenue || maxRevenue) {
+      filter["financials.revenue"] = {};
+      if (minRevenue) filter["financials.revenue"].$gte = Number(minRevenue);
+      if (maxRevenue) filter["financials.revenue"].$lte = Number(maxRevenue);
+    }
+
+    let sort = {};
+    if (sortBy === "revenue") sort["financials.revenue"] = -1;
+    if (sortBy === "CAGR") sort["financials.CAGR"] = -1;
+    if (sortBy === "profitMargin") sort["financials.profitMargin"] = -1;
+
+    const businesses = await Business.find(filter)
+      .sort(sort)
+      .select("-password");
     res.json(businesses);
   } catch (error) {
     res.status(500).json({ message: error.message });
