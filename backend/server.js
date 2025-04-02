@@ -11,10 +11,12 @@ app.use(express.json());
 // Import routes
 const authRoutes = require("./routes/auth");
 const businessRoutes = require("./routes/businessRoutes");
+const productRoutes = require("./routes/product");
 
 // Routes
 app.use("/api/auth", authRoutes);
 app.use("/api/businesses", businessRoutes);
+app.use("/api/products", productRoutes);
 
 // Connect to MongoDB
 mongoose
