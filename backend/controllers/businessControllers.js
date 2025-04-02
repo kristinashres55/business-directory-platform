@@ -90,7 +90,7 @@ const deleteBusiness = async (req, res) => {
       return res.status(401).json({ message: "Not authorized" });
     }
 
-    await business.remove();
+    await Business.deleteOne({ _id: req.params.id });
     res.json({ message: "Business removed" });
   } catch (error) {
     res.status(500).json({ message: error.message });
