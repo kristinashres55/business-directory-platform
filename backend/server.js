@@ -12,11 +12,13 @@ app.use(express.json());
 const authRoutes = require("./routes/auth");
 const businessRoutes = require("./routes/businessRoutes");
 const productRoutes = require("./routes/product");
+const financialRoutes = require("./routes/financial");
 
 // Routes
 app.use("/api/auth", authRoutes);
 app.use("/api/businesses", businessRoutes);
 app.use("/api/products", productRoutes);
+app.use("/api/financials", financialRoutes);
 
 // Connect to MongoDB
 mongoose
