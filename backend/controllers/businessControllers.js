@@ -1,4 +1,4 @@
-const Business = require("../models/Business");
+const Business = require("../models/User");
 
 // @desc Create new business
 // @route POST /api/businesses
@@ -27,7 +27,9 @@ const createBusiness = async (req, res) => {
 // @access Public
 const getBusinesses = async (req, res) => {
   try {
-    const businesses = await Business.find();
+    const businesses = await Business.find({ role: "business" }).select(
+      "-password"
+    );
     res.json(businesses);
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -56,16 +58,17 @@ const updateBusiness = async (req, res) => {
   try {
     const business = await Business.findById(req.params.id);
 
-    if (!business) {
+    if (!business || business.role !== "business") {
       return res.status(404).json({ message: "Business not found" });
     }
 
-    if (business.owner.toString() !== req.user._id.toString()) {
+    if (req.user._id.toString() !== req.params.id) {
       return res.status(401).json({ message: "Not authorized" });
     }
 
     Object.assign(business, req.body);
     await business.save();
+
     res.json(business);
   } catch (error) {
     res.status(500).json({ message: error.message });
