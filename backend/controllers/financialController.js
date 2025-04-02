@@ -42,7 +42,6 @@ exports.getFinancials = async (req, res) => {
 };
 
 // Update Financial Data (Business only)
-// Update Financial Data (Business only)
 exports.updateFinancials = async (req, res) => {
   try {
     const business = await User.findById(req.params.businessId);
