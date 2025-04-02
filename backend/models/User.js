@@ -1,11 +1,16 @@
 const mongoose = require("mongoose");
 
 const financialSchema = {
-  revenue: [Number],
-  CAGR: Number,
-  profitMargin: Number,
-  ROI: Number,
-  customerRetentionRate: Number,
+  revenue: [
+    {
+      year: Number,
+      amount: Number,
+    },
+  ],
+  cagr: { type: Number, default: 0 },
+  profitMargin: { type: Number, default: 0 },
+  roi: { type: Number, default: 0 },
+  customerRetentionRate: { type: Number, default: 0 },
 };
 
 const userSchema = new mongoose.Schema({
