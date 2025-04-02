@@ -82,11 +82,11 @@ const deleteBusiness = async (req, res) => {
   try {
     const business = await Business.findById(req.params.id);
 
-    if (!business) {
+    if (!business || business.role !== "business") {
       return res.status(404).json({ message: "Business not found" });
     }
 
-    if (business.owner.toString() !== req.user._id.toString()) {
+    if (req.user._id.toString() !== req.params.id) {
       return res.status(401).json({ message: "Not authorized" });
     }
 
