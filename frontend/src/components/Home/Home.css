@@ -1,0 +1,44 @@
+.homepage-image {
+  position: relative;
+  width: 100%;
+  height: 850px;
+  margin-bottom: 20px;
+}
+
+.homepage-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background: rgba(15, 15, 15, 0.6);
+}
+
+.homepage-image::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* Dark overlay with 50% opacity */
+  z-index: 1;
+}
+
+.homepage-desc {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  text-align: center;
+  z-index: 2;
+}
+
+.homepage-desc h1 {
+  font-size: 3rem;
+  margin-bottom: 20px;
+}
+
+.homepage-desc p {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+}
