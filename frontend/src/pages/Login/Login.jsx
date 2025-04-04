@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./Login.css";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -59,7 +60,9 @@ const Login = () => {
         </form>
         <div className="login-footer">
           <p className="login-footer-text">Don't have an account?</p>
-          <button className="login-signup-button">Sign Up</button>
+          <Link to="/register">
+            <button className="login-signup-button">Sign Up</button>
+          </Link>
         </div>
       </div>
     </div>

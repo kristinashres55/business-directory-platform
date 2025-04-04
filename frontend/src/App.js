@@ -5,6 +5,7 @@ import Login from "./pages/Login/Login";
 import Navbar from "./components/Navbar/Navbar";
 import Main from "./components/Main/Main";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Register from "./pages/Register/Register";
 
 function App() {
   return (
@@ -24,7 +25,7 @@ function App() {
 
         {/* Other individual pages */}
         <Route path="/login" element={<Login />} />
-        {/* <Route path="/register" element={<RegisterPage />} /> */}
+        <Route path="/register" element={<Register />} />
       </Routes>
     </Router>
   );
