@@ -14,7 +14,7 @@ exports.register = async (req, res) => {
     role,
     businessType,
     description,
-    contactDetails,
+    phone,
     location,
   } = req.body;
   const hashedPassword = await bcrypt.hash(password, 10);
@@ -25,7 +25,7 @@ exports.register = async (req, res) => {
     role,
     businessType,
     description,
-    contactDetails,
+    phone,
     location,
   });
   res.status(201).json({ token: generateToken(user._id), user });

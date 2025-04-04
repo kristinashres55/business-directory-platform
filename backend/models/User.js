@@ -19,7 +19,7 @@ const userSchema = new mongoose.Schema({
   password: String,
   role: { type: String, enum: ["general", "business"], default: "general" },
   description: String,
-  contactDetails: String,
+  phone: String,
   businessType: String,
   location: String,
   products: [{ type: mongoose.Schema.Types.ObjectId, ref: "Product" }],
