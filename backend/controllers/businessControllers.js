@@ -52,24 +52,22 @@ const getBusinesses = async (req, res) => {
   }
 };
 
-// @desc Get a business by ID
-// @route GET /api/businesses/:id
-// @access Public
 const getBusinessById = async (req, res) => {
   try {
-    const business = await Business.findById(req.params.id);
-    if (!business) {
+    const business = await Business.findById(req.params.id)
+      .populate("products") // <-- This pulls actual product docs
+      .select("-password"); // optional: exclude sensitive fields
+
+    if (!business || business.role !== "business") {
       return res.status(404).json({ message: "Business not found" });
     }
+
     res.json(business);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 };
 
-// @desc Update business
-// @route PUT /api/businesses/:id
-// @access Private (Business Users Only)
 const updateBusiness = async (req, res) => {
   try {
     const business = await Business.findById(req.params.id);
@@ -91,9 +89,6 @@ const updateBusiness = async (req, res) => {
   }
 };
 
-// @desc Delete business
-// @route DELETE /api/businesses/:id
-// @access Private (Business Users Only)
 const deleteBusiness = async (req, res) => {
   try {
     const business = await Business.findById(req.params.id);

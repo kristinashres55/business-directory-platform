@@ -7,52 +7,53 @@ import Navbar from "../../components/Navbar/Navbar";
 const BusinessProfile = () => {
   const { id } = useParams();
   const [business, setBusiness] = useState(null);
-  const [error, setError] = useState("");
+  const [products, setProducts] = useState([]);
 
   useEffect(() => {
     const fetchBusiness = async () => {
-      try {
-        const response = await axios.get(
-          `http://localhost:5000/api/businesses/${id}`
-        );
-        setBusiness(response.data);
-      } catch (err) {
-        setError("Failed to load business profile.");
-      }
+      const res = await axios.get(`http://localhost:5000/api/businesses/${id}`);
+      setBusiness(res.data);
+    };
+
+    const fetchProducts = async () => {
+      const res = await axios.get(`http://localhost:5000/api/products/${id}`);
+      setProducts(res.data);
     };
 
     fetchBusiness();
+    fetchProducts();
   }, [id]);
 
-  if (error) return <div className="error">{error}</div>;
   if (!business) return <div>Loading...</div>;
 
   return (
     <div className="business-profile">
-      <h2>{business.name}</h2>
-      <p>
-        <strong>Type:</strong> {business.businessType}
-      </p>
-      <p>
-        <strong>Description:</strong> {business.description}
-      </p>
-      <p>
-        <strong>Location:</strong> {business.contactDetails}
-      </p>
+      <div className="profile-card">
+        <h2>{business.name}</h2>
+        <p>
+          <strong>Type:</strong> {business.businessType}
+        </p>
+        <p>
+          <strong>Description:</strong> {business.description}
+        </p>
+        <p>
+          <strong>Location:</strong> {business.location}
+        </p>
 
-      <h3>Offerings</h3>
-      {business.products.length === 0 ? (
-        <p>No products/services listed.</p>
-      ) : (
-        <ul>
-          {business.products.map((product) => (
-            <li key={product._id}>
-              <strong>{product.name}</strong>: {product.description} ($
-              {product.price})
-            </li>
-          ))}
-        </ul>
-      )}
+        <h3>Offerings</h3>
+        {products.length > 0 ? (
+          <ul>
+            {products.map((product) => (
+              <li key={product._id}>
+                <strong>{product.name}</strong> - {product.description} ($
+                {product.price}) {product.availability ? "✔" : "❌"}
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p>No products/services listed.</p>
+        )}
+      </div>
     </div>
   );
 };
