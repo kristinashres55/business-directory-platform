@@ -85,7 +85,6 @@ const Register = () => {
     }
 
     try {
-      // remove confirmPassword before sending
       const { confirmPassword, ...cleanedData } = formData;
 
       const response = await axios.post(
@@ -93,7 +92,7 @@ const Register = () => {
         { ...cleanedData, role }
       );
 
-      setSuccess("Registration successful! Please log in.");
+      setSuccess("Registration successful! Please log in.", response.data);
       setFormData({
         name: "",
         email: "",
@@ -161,12 +160,22 @@ const Register = () => {
             {role === "business" && (
               <>
                 <label>Business Type:</label>
-                <input
-                  type="text"
+                <select
                   name="businessType"
                   value={formData.businessType}
                   onChange={handleChange}
-                />
+                  required
+                >
+                  <option value="">-- Select Type --</option>
+                  <option value="Private">Private</option>
+                  <option value="Corporation">Corporation</option>
+                  <option value="Partnership">Partnership</option>
+                  <option value="Sole Proprietorship">
+                    Sole Proprietorship
+                  </option>
+                  <option value="LLC">LLC</option>
+                  <option value="Nonprofit">Nonprofit</option>
+                </select>
 
                 <label>Description:</label>
                 <textarea
