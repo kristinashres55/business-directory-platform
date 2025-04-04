@@ -22,6 +22,8 @@ const Login = () => {
 
       // Store token (for protected routes)
       localStorage.setItem("token", response.data.token);
+      localStorage.setItem("user", JSON.stringify(response.data.user));
+
       console.log("Login successful:", response.data);
       // Redirect to dashboard (or role-specific page if needed)
       window.location.href = "/";
