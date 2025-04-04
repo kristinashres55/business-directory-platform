@@ -41,18 +41,20 @@ const Register = () => {
       phone,
       location,
     } = formData;
+
+    // --- VALIDATION ---
     if (!name || name.length < 2) {
       setError("Name is required and must be at least 2 characters.");
       return;
     }
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
+    if (!email || !emailRegex.test(email)) {
       setError("Please enter a valid email address.");
       return;
     }
 
-    if (password.length < 6) {
+    if (!password || password.length < 6) {
       setError("Password must be at least 6 characters long.");
       return;
     }
@@ -62,8 +64,8 @@ const Register = () => {
       return;
     }
 
-    const phoneRegex = /^[0-9+\-()\s]{7,20}$/;
     if (role === "business") {
+      const phoneRegex = /^[0-9+\-()\s]{7,20}$/;
       if (!phone || !phoneRegex.test(phone)) {
         setError("Please enter a valid phone number.");
         return;
@@ -72,21 +74,26 @@ const Register = () => {
         setError("Business type is required.");
         return;
       }
+      if (!description) {
+        setError("Description is required.");
+        return;
+      }
       if (!location) {
         setError("Location is required.");
         return;
       }
     }
+
     try {
+      // remove confirmPassword before sending
+      const { confirmPassword, ...cleanedData } = formData;
+
       const response = await axios.post(
         "http://localhost:5000/api/auth/register",
-        {
-          ...formData,
-          role,
-        }
+        { ...cleanedData, role }
       );
 
-      setSuccess("Registration successful! Please log in.", response.data);
+      setSuccess("Registration successful! Please log in.");
       setFormData({
         name: "",
         email: "",
@@ -98,7 +105,12 @@ const Register = () => {
         location: "",
       });
     } catch (err) {
-      setError("Registration failed. Please try again.", err);
+      console.error(err);
+      if (err.response && err.response.data && err.response.data.message) {
+        setError(err.response.data.message); // will show: "Email is already registered."
+      } else {
+        setError("Registration failed. Please try again.");
+      }
     }
   };
 
