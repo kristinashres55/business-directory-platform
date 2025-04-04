@@ -1,16 +1,32 @@
 import logo from "./logo.svg";
 import "./App.css";
 import Home from "./components/Home/Home";
+import Login from "./pages/Login/Login";
 import Navbar from "./components/Navbar/Navbar";
 import Main from "./components/Main/Main";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 function App() {
   return (
-    <div className="App">
-      <Navbar />
-      <Home />
-      <Main />
-    </div>
+    <Router>
+      <Routes>
+        {/* This route renders Navbar + Home + Main */}
+        <Route
+          path="/"
+          element={
+            <>
+              <Navbar />
+              <Home />
+              <Main />
+            </>
+          }
+        />
+
+        {/* Other individual pages */}
+        <Route path="/login" element={<Login />} />
+        {/* <Route path="/register" element={<RegisterPage />} /> */}
+      </Routes>
+    </Router>
   );
 }
 
