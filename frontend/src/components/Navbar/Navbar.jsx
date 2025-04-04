@@ -1,10 +1,12 @@
 import React from "react";
 import "./Navbar.css";
 import { Link } from "react-router-dom";
-import { useAuth } from "../../hooks/useAuth"; // create this if not done
+import { useAuth } from "../../hooks/useAuth";
+import { logout } from "../../hooks/useAuth";
 
 const Navbar = () => {
   const { user, token } = useAuth();
+  console.log("User:", user);
 
   const handleLogout = () => {
     localStorage.clear();
@@ -19,9 +21,7 @@ const Navbar = () => {
           <li>
             <Link to="/">Home</Link>
           </li>
-          <li>
-            <Link to="/about">About</Link>
-          </li>
+
           <li>
             <Link to="/services">Services</Link>
           </li>
@@ -31,6 +31,9 @@ const Navbar = () => {
 
           {user?.role === "business" && (
             <>
+              <li>
+                <Link to={`/businesses/${user._id}`}>Business Profile</Link>
+              </li>
               <li>
                 <Link to="/financials">Financials</Link>
               </li>

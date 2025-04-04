@@ -1,0 +1,26 @@
+.business-profile {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 6px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.business-profile h2 {
+  color: #1c3c78;
+}
+
+.business-profile p {
+  margin: 10px 0;
+}
+
+.business-profile ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.business-profile li {
+  padding: 8px;
+  border-bottom: 1px solid #ddd;
+}
