@@ -1,0 +1,36 @@
+.business-list-container {
+  padding: 40px;
+  max-width: 1000px;
+  margin: auto;
+}
+
+.business-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+  gap: 20px;
+}
+
+.business-card {
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 20px;
+  background-color: #fff;
+  transition: 0.3s ease;
+}
+
+.business-card:hover {
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.business-card h3 {
+  color: #2c3e50;
+  margin-bottom: 10px;
+}
+
+.business-card a {
+  display: inline-block;
+  margin-top: 10px;
+  color: #007bff;
+  font-weight: bold;
+  text-decoration: none;
+}
