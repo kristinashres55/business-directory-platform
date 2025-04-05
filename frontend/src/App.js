@@ -9,6 +9,7 @@ import Register from "./pages/Register/Register";
 import BusinessProfile from "./pages/BusinessProfile/BusinessProfile";
 import MainLayout from "./layouts/MainLayout";
 import FinancialDashboard from "./pages/FinancialDashboard/FinancialDashboard";
+import BusinessList from "./pages/BusinessList/BusinessList";
 
 function App() {
   return (
@@ -33,6 +34,15 @@ function App() {
           element={
             <MainLayout>
               <BusinessProfile />
+            </MainLayout>
+          }
+        />
+
+        <Route
+          path="/businesses"
+          element={
+            <MainLayout>
+              <BusinessList />
             </MainLayout>
           }
         />

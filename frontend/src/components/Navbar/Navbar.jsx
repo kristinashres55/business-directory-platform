@@ -16,7 +16,9 @@ const Navbar = () => {
   return (
     <div>
       <nav className="navbar">
-        <div className="navbar-logo">Business Directory</div>
+        <Link to="/">
+          <div className="navbar-logo">Business Directory</div>
+        </Link>
         <ul className="navbar-links">
           <li>
             <Link to="/">Home</Link>
@@ -27,6 +29,9 @@ const Navbar = () => {
           </li>
           <li>
             <Link to="/contact">Contact</Link>
+          </li>
+          <li>
+            <Link to="/businesses">Browse Businesses</Link>
           </li>
 
           {user?.role === "business" && (
@@ -45,9 +50,6 @@ const Navbar = () => {
 
           {user?.role === "general" && (
             <>
-              <li>
-                <Link to="/businesses">Browse Businesses</Link>
-              </li>
               <li>
                 <Link to="/messages">Messages</Link>
               </li>
