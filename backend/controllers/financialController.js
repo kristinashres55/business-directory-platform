@@ -12,7 +12,7 @@ exports.addFinancialData = async (req, res) => {
         .json({ message: "Only business users can update financials" });
     }
 
-    business.financials.revenue.push({ year, amount });
+    if (year && amount) business.financials.revenue.push({ year, amount });
     if (cagr) business.financials.cagr = cagr;
     if (profitMargin) business.financials.profitMargin = profitMargin;
     if (roi) business.financials.roi = roi;

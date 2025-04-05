@@ -8,6 +8,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Register from "./pages/Register/Register";
 import BusinessProfile from "./pages/BusinessProfile/BusinessProfile";
 import MainLayout from "./layouts/MainLayout";
+import FinancialDashboard from "./pages/FinancialDashboard/FinancialDashboard";
 
 function App() {
   return (
@@ -32,6 +33,14 @@ function App() {
           element={
             <MainLayout>
               <BusinessProfile />
+            </MainLayout>
+          }
+        />
+        <Route
+          path="/financials"
+          element={
+            <MainLayout>
+              <FinancialDashboard />
             </MainLayout>
           }
         />
