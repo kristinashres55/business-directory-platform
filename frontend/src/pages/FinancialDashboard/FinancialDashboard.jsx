@@ -1,20 +1,35 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
-import "./FinancialDashboard.css"; // optional styling
+import { Bar, Line, Doughnut } from "react-chartjs-2";
+import {
+  Chart as ChartJS,
+  BarElement,
+  CategoryScale,
+  LinearScale,
+  Tooltip,
+  Legend,
+  LineElement,
+  PointElement,
+  ArcElement,
+} from "chart.js";
+import "./FinancialDashboard.css";
 import { useAuth } from "../../hooks/useAuth";
 
-const FinancialDashboard = () => {
+ChartJS.register(
+  BarElement,
+  CategoryScale,
+  LinearScale,
+  Tooltip,
+  Legend,
+  LineElement,
+  PointElement,
+  ArcElement
+);
+
+export default function FinancialDashboard() {
   const { user, token } = useAuth();
   const [financials, setFinancials] = useState(null);
-  const [formData, setFormData] = useState({
-    year: "",
-    amount: "",
-    cagr: "",
-    profitMargin: "",
-    roi: "",
-    customerRetentionRate: "",
-  });
-  const [message, setMessage] = useState("");
+  const [error, setError] = useState("");
 
   useEffect(() => {
     const fetchFinancials = async () => {
@@ -27,97 +42,65 @@ const FinancialDashboard = () => {
             },
           }
         );
+        console.log("Fetched Financial Data:", res.data);
         setFinancials(res.data);
       } catch (err) {
-        console.error("Failed to fetch financials:", err);
+        console.error("Error fetching financials", err);
+        setError("Unable to fetch financial data.");
       }
     };
 
-    if (user?.role === "business") {
+    if (user && token) {
       fetchFinancials();
     }
   }, [user, token]);
 
-  const handleChange = (e) => {
-    setFormData((prev) => ({
-      ...prev,
-      [e.target.name]: e.target.value,
-    }));
+  if (error) return <div className="error">{error}</div>;
+  if (!financials)
+    return <div className="loading">Loading financial data...</div>;
+
+  const { cagr, roi, profitMargin, customerRetentionRate, revenue } =
+    financials;
+
+  const barData = {
+    labels: revenue.map((r) => r.year),
+    datasets: [
+      {
+        label: "Revenue",
+        data: revenue.map((r) => r.amount),
+        backgroundColor: "rgba(54, 162, 235, 0.6)",
+      },
+    ],
   };
 
-  const handleAddData = async (e) => {
-    e.preventDefault();
-    try {
-      const res = await axios.post(
-        `http://localhost:5000/api/financials`,
-        formData,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      setFinancials(res.data.financials);
-      setMessage("Financial data added successfully.");
-    } catch (err) {
-      console.error(err);
-      setMessage("Failed to add data.");
-    }
+  const lineData = {
+    labels: revenue.map((r) => r.year),
+    datasets: [
+      {
+        label: "Revenue Trend",
+        data: revenue.map((r) => r.amount),
+        fill: false,
+        borderColor: "#42a5f5",
+        tension: 0.3,
+      },
+    ],
   };
 
   return (
     <div className="financial-dashboard">
       <h2>Financial Dashboard</h2>
-      {message && <p className="message">{message}</p>}
 
-      <form onSubmit={handleAddData} className="financial-form">
-        <input
-          type="number"
-          name="year"
-          placeholder="Year"
-          value={formData.year}
-          onChange={handleChange}
-          required
-        />
-        <input
-          type="number"
-          name="amount"
-          placeholder="Revenue Amount"
-          value={formData.amount}
-          onChange={handleChange}
-          required
-        />
-        <input
-          type="number"
-          name="cagr"
-          placeholder="CAGR"
-          value={formData.cagr}
-          onChange={handleChange}
-        />
-        <input
-          type="number"
-          name="profitMargin"
-          placeholder="Profit Margin"
-          value={formData.profitMargin}
-          onChange={handleChange}
-        />
-        <input
-          type="number"
-          name="roi"
-          placeholder="ROI"
-          value={formData.roi}
-          onChange={handleChange}
-        />
-        <input
-          type="number"
-          name="customerRetentionRate"
-          placeholder="Customer Retention Rate"
-          value={formData.customerRetentionRate}
-          onChange={handleChange}
-        />
-        <button type="submit">Add Financial Data</button>
-      </form>
+      <div className="chart-container">
+        <div className="chart-card">
+          <h4>Revenue Over Years</h4>
+          <Bar data={barData} />
+        </div>
 
+        <div className="chart-card">
+          <h4>Trend Analysis</h4>
+          <Line data={lineData} />
+        </div>
+      </div>
       {financials && (
         <div className="financial-details">
           <h3>Revenue Over Years:</h3>
@@ -136,6 +119,4 @@ const FinancialDashboard = () => {
       )}
     </div>
   );
-};
-
-export default FinancialDashboard;
+}
