@@ -19,12 +19,18 @@ const BusinessList = () => {
 
   const fetchBusinesses = async () => {
     try {
+      const token = localStorage.getItem("token");
+      const query = new URLSearchParams(filters).toString();
+
       const res = await axios.get(
-        "http://localhost:5000/api/businesses/search",
+        `http://localhost:5000/api/businesses/search?${query}`,
         {
-          params: filters,
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         }
       );
+
       setBusinesses(res.data);
     } catch (err) {
       console.error("Failed to fetch businesses:", err);
@@ -103,6 +109,11 @@ const BusinessList = () => {
                 <strong>CAGR:</strong> {business.financials?.cagr || 0}%
               </p>
               <a href={`/businesses/${business._id}`}>View Profile</a>
+              {/* {error && (
+                <div className="error-message">
+                  <p>{error}</p>
+                </div>
+              )}  */}
             </div>
           ))
         )}

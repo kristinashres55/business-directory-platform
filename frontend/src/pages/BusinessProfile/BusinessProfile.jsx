@@ -2,29 +2,48 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import "./BusinessProfile.css";
-import Navbar from "../../components/Navbar/Navbar";
 
 const BusinessProfile = () => {
   const { id } = useParams();
   const [business, setBusiness] = useState(null);
   const [products, setProducts] = useState([]);
+  const [error, setError] = useState("");
 
   useEffect(() => {
     const fetchBusiness = async () => {
-      const res = await axios.get(`http://localhost:5000/api/businesses/${id}`);
-      setBusiness(res.data);
+      try {
+        const token = localStorage.getItem("token");
+        const res = await axios.get(
+          `http://localhost:5000/api/businesses/${id}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        setBusiness(res.data);
+      } catch (err) {
+        console.error("Failed to fetch business:", err);
+        setError("You must be logged in to view this business profile.");
+      }
     };
 
     const fetchProducts = async () => {
-      const res = await axios.get(`http://localhost:5000/api/products/${id}`);
-      setProducts(res.data);
+      try {
+        const res = await axios.get(`http://localhost:5000/api/products/${id}`);
+        setProducts(res.data);
+      } catch (err) {
+        console.error("Failed to fetch products:", err);
+      }
     };
 
     fetchBusiness();
     fetchProducts();
   }, [id]);
 
-  if (!business) return <div>Loading...</div>;
+  if (error)
+    return <div style={{ padding: "2rem", color: "red" }}>{error}</div>;
+  if (!business) return <div style={{ padding: "2rem" }}>Loading...</div>;
 
   return (
     <div className="business-profile">

@@ -13,9 +13,9 @@ const router = express.Router();
 
 // Routes
 router.post("/", protect, businessOnly, createBusiness);
-router.get("/", getBusinesses);
-router.get("/search", getFilteredBusinesses);
-router.get("/:id", getBusinessById);
+router.get("/", protect, getBusinesses);
+router.get("/search", protect, getFilteredBusinesses);
+router.get("/:id", protect, getBusinessById);
 router.put("/:id", protect, businessOnly, updateBusiness);
 router.delete("/:id", protect, businessOnly, deleteBusiness);
 
