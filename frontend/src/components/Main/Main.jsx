@@ -1,5 +1,6 @@
 import React from "react";
 import "./Main.css";
+import { Link } from "react-router-dom";
 
 const Main = () => {
   return (
@@ -10,7 +11,9 @@ const Main = () => {
           <p className="card-text">
             View profiles, services, and financials of verified businesses.
           </p>
-          <button className="card-button primary">Explore</button>
+          <Link to="/businesses" className="card-link">
+            <button className="card-button primary">Explore</button>
+          </Link>
         </div>
 
         <div className="card">

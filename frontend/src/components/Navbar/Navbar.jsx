@@ -30,9 +30,9 @@ const Navbar = () => {
           <li>
             <Link to="/contact">Contact</Link>
           </li>
-          <li>
+          {/* <li>
             <Link to="/businesses">Browse Businesses</Link>
-          </li>
+          </li> */}
 
           {user?.role === "business" && (
             <>
