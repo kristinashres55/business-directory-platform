@@ -19,9 +19,11 @@ const BusinessList = () => {
 
   const fetchBusinesses = async () => {
     try {
-      const query = new URLSearchParams(filters).toString();
       const res = await axios.get(
-        `http://localhost:5000/api/businesses/search?${query}`
+        "http://localhost:5000/api/businesses/search",
+        {
+          params: filters,
+        }
       );
       setBusinesses(res.data);
     } catch (err) {
@@ -30,7 +32,7 @@ const BusinessList = () => {
   };
 
   useEffect(() => {
-    fetchBusinesses(); // fetch default on page load
+    fetchBusinesses();
   }, []);
 
   const handleSearch = (e) => {
