@@ -1,8 +1,5 @@
 const Business = require("../models/User");
 
-// @desc Create new business
-// @route POST /api/businesses
-// @access Private (Business Users Only)
 const createBusiness = async (req, res) => {
   try {
     const { name, type, description, contact, products, services } = req.body;
@@ -22,9 +19,6 @@ const createBusiness = async (req, res) => {
   }
 };
 
-// @desc Get all businesses
-// @route GET /api/businesses
-// @access Public
 const getBusinesses = async (req, res) => {
   try {
     const { type, location, minRevenue, maxRevenue, sortBy } = req.query;
@@ -108,10 +102,88 @@ const deleteBusiness = async (req, res) => {
   }
 };
 
+const getFilteredBusinesses = async (req, res) => {
+  try {
+    const {
+      type,
+      location,
+      minRevenue,
+      cagrMin,
+      profitMarginMin,
+      roiMin,
+      retentionMin,
+    } = req.query;
+
+    // Step 1: Filter by role and basic fields
+    const matchStage = {
+      role: "business",
+      ...(type && { businessType: type }),
+      ...(location && {
+        location: { $regex: location, $options: "i" },
+      }),
+    };
+
+    // Step 2: Build aggregation pipeline
+    const pipeline = [
+      { $match: matchStage },
+      {
+        $addFields: {
+          totalRevenue: { $sum: "$financials.revenue.amount" },
+        },
+      },
+    ];
+
+    // Step 3: Add conditional filters
+    if (minRevenue) {
+      pipeline.push({
+        $match: { totalRevenue: { $gte: parseFloat(minRevenue) } },
+      });
+    }
+    if (cagrMin) {
+      pipeline.push({
+        $match: { "financials.cagr": { $gte: parseFloat(cagrMin) } },
+      });
+    }
+    if (profitMarginMin) {
+      pipeline.push({
+        $match: {
+          "financials.profitMargin": { $gte: parseFloat(profitMarginMin) },
+        },
+      });
+    }
+    if (roiMin) {
+      pipeline.push({
+        $match: {
+          "financials.roi": { $gte: parseFloat(roiMin) },
+        },
+      });
+    }
+    if (retentionMin) {
+      pipeline.push({
+        $match: {
+          "financials.customerRetentionRate": {
+            $gte: parseFloat(retentionMin),
+          },
+        },
+      });
+    }
+
+    pipeline.push({ $sort: { totalRevenue: -1 } });
+
+    const businesses = await Business.aggregate(pipeline);
+
+    res.json(businesses);
+  } catch (err) {
+    console.error("Search filter error:", err);
+    res.status(500).json({ message: "Search failed", error: err.message });
+  }
+};
+
 module.exports = {
   createBusiness,
   getBusinesses,
   getBusinessById,
+  getFilteredBusinesses,
   updateBusiness,
   deleteBusiness,
 };

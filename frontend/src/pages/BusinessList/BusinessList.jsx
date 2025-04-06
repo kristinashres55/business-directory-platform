@@ -24,19 +24,19 @@ const BusinessList = () => {
     <div className="business-list-container">
       <h2>Explore Verified Businesses</h2>
       <div className="business-cards">
-        {businesses.map((biz) => (
-          <div className="business-card" key={biz._id}>
-            <h3>{biz.name}</h3>
+        {businesses.map((business) => (
+          <div className="business-card" key={business._id}>
+            <h3>{business.name}</h3>
             <p>
-              <strong>Type:</strong> {biz.businessType}
+              <strong>Type:</strong> {business.businessType}
             </p>
             <p>
-              <strong>Location:</strong> {biz.location}
+              <strong>Location:</strong> {business.location}
             </p>
             <p>
-              <strong>Description:</strong> {biz.description}
+              <strong>Description:</strong> {business.description}
             </p>
-            <Link to={`/businesses/${biz._id}`}>View Profile</Link>
+            <Link to={`/businesses/${business._id}`}>View Profile</Link>
           </div>
         ))}
       </div>
