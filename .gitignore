@@ -3,13 +3,13 @@ backend/node_modules/
 frontend/node_modules/
 
 # Environment files
-backend/.env
+
 frontend/.env
 
 # Miscellaneous
 *.log
 .DS_Store
-.env
+    .env
 .pnp
 .pnp.js
 coverage/
