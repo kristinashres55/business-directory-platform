@@ -9,7 +9,17 @@ const Main = () => {
         <div className="card">
           <h2 className="card-title">Browse Businesses</h2>
           <p className="card-text">
-            View profiles, services, and financials of verified businesses.
+            View profiles and services offfered by verified businesses.
+          </p>
+          <Link to="/businesses" className="card-link">
+            <button className="card-button primary">Explore</button>
+          </Link>
+        </div>
+
+        <div className="card">
+          <h2 className="card-title">Browse Products</h2>
+          <p className="card-text">
+            Browse a vast selection of products from various businesses.
           </p>
           <Link to="/businesses" className="card-link">
             <button className="card-button primary">Explore</button>
@@ -23,14 +33,6 @@ const Main = () => {
             growth.
           </p>
           <button className="card-button secondary">Get Started</button>
-        </div>
-
-        <div className="card">
-          <h2 className="card-title">Connect & Message</h2>
-          <p className="card-text">
-            Use the platform to contact businesses or other users securely.
-          </p>
-          <button className="card-button outline">Start Messaging</button>
         </div>
       </div>
     </div>

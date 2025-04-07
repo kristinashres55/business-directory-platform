@@ -8,6 +8,8 @@ const BusinessProfile = () => {
   const [business, setBusiness] = useState(null);
   const [products, setProducts] = useState([]);
   const [error, setError] = useState("");
+  const [isEditing, setIsEditing] = useState(false);
+  const [formData, setFormData] = useState({});
 
   useEffect(() => {
     const fetchBusiness = async () => {
@@ -16,12 +18,11 @@ const BusinessProfile = () => {
         const res = await axios.get(
           `http://localhost:5000/api/businesses/${id}`,
           {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
+            headers: { Authorization: `Bearer ${token}` },
           }
         );
         setBusiness(res.data);
+        setFormData(res.data); // for editing
       } catch (err) {
         console.error("Failed to fetch business:", err);
         setError("You must be logged in to view this business profile.");
@@ -41,6 +42,29 @@ const BusinessProfile = () => {
     fetchProducts();
   }, [id]);
 
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleUpdate = async () => {
+    try {
+      const token = localStorage.getItem("token");
+      const res = await axios.put(
+        `http://localhost:5000/api/businesses/${id}`,
+        formData,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+      setBusiness(res.data);
+      setIsEditing(false);
+    } catch (err) {
+      console.error("Failed to update business:", err);
+      alert("Update failed.");
+    }
+  };
+
   if (error)
     return <div style={{ padding: "2rem", color: "red" }}>{error}</div>;
   if (!business) return <div style={{ padding: "2rem" }}>Loading...</div>;
@@ -48,16 +72,63 @@ const BusinessProfile = () => {
   return (
     <div className="business-profile">
       <div className="profile-card">
-        <h2>{business.name}</h2>
+        <h2>
+          {isEditing ? (
+            <input
+              name="name"
+              value={formData.name}
+              onChange={handleInputChange}
+            />
+          ) : (
+            business.name
+          )}
+        </h2>
+
         <p>
-          <strong>Type:</strong> {business.businessType}
+          <strong>Type:</strong>{" "}
+          {isEditing ? (
+            <input
+              name="businessType"
+              value={formData.businessType}
+              onChange={handleInputChange}
+            />
+          ) : (
+            business.businessType
+          )}
         </p>
         <p>
-          <strong>Description:</strong> {business.description}
+          <strong>Description:</strong>{" "}
+          {isEditing ? (
+            <textarea
+              name="description"
+              value={formData.description}
+              onChange={handleInputChange}
+            />
+          ) : (
+            business.description
+          )}
         </p>
         <p>
-          <strong>Location:</strong> {business.location}
+          <strong>Location:</strong>{" "}
+          {isEditing ? (
+            <input
+              name="location"
+              value={formData.location}
+              onChange={handleInputChange}
+            />
+          ) : (
+            business.location
+          )}
         </p>
+
+        {isEditing ? (
+          <>
+            <button onClick={handleUpdate}>Save</button>
+            <button onClick={() => setIsEditing(false)}>Cancel</button>
+          </>
+        ) : (
+          <button onClick={() => setIsEditing(true)}>Edit Profile</button>
+        )}
 
         <h3>Offerings</h3>
         {products.length > 0 ? (
