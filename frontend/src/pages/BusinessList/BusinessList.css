@@ -1,56 +1,94 @@
+.business-list-page {
+  background-color: #ffffff;
+  padding: 2rem 0;
+}
+
 .business-list-container {
-  padding: 2rem;
   max-width: 1200px;
   margin: auto;
+  padding: 0 20px;
+}
+
+.business-list-container h2 {
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 2rem;
+  color: #041858;
 }
 
 .filter-form {
-  display: flex;
-  flex-direction: row;
-  gap: 10px;
   margin-bottom: 30px;
 }
 
-.filter-form input,
-.filter-form select {
-  padding: 10px;
-  width: 200px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
+.form-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  justify-content: center;
 }
 
-.filter-form button {
-  padding: 10px 16px;
-  background-color: #007acc;
+.form-group input,
+.form-group select {
+  flex: 1 1 200px;
+  min-width: 200px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.form-group select {
+  height: 38px;
+}
+
+.form-group button {
+  padding: 10px 20px;
+  width: 100px;
+  height: 40px;
+  background-color: #041858;
   color: white;
   border: none;
+  margin: 0px;
   font-size: 16px;
   border-radius: 6px;
   cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.form-group button:hover {
+  background-color: #005fa3;
 }
 
 .business-card-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 25px;
 }
 
 .business-card {
   background: white;
-  padding: 20px;
+  padding: 25px 20px;
   border-radius: 10px;
-  border: 1px solid #eee;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.05);
-  transition: all 0.2s ease;
+  border: 1px solid #ddd;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.06);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .business-card:hover {
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
 }
 
 .business-card h3 {
   color: #1f2937;
   margin-bottom: 10px;
+  font-size: 1.2rem;
+}
+
+.business-card p {
+  font-size: 14px;
+  margin: 4px 0;
+  color: #444;
 }
 
 .business-card a {
@@ -59,10 +97,122 @@
   font-weight: bold;
   color: #2563eb;
   text-decoration: none;
+  font-size: 14px;
+}
+
+.business-card a:hover {
+  text-decoration: underline;
+}
+
+.section-title {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.section-subtitle {
+  text-align: center;
+  font-size: 1rem;
+  color: #666;
+  margin-bottom: 30px;
+}
+
+.business-card.fancy {
+  text-align: center;
+  border-radius: 14px;
+  padding: 25px;
+  background-color: #fff;
+  border: 1px solid #eee;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  transition: transform 0.2s;
+}
+
+.business-card.fancy:hover {
+  transform: translateY(-5px);
+}
+
+.card-icon {
+  width: 40px;
+  margin-bottom: 15px;
+}
+
+.business-card.fancy h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #111;
+  margin-bottom: 8px;
+}
+
+.business-card.fancy p {
+  font-size: 14px;
+  color: #444;
+  margin: 4px 0;
+}
+
+.business-card.fancy a {
+  display: block;
+  margin-top: 10px;
+  color: #000;
+  font-weight: bold;
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.business-card.fancy a:hover {
+  text-decoration: underline;
+}
+
+.center-btn {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.view-more-btn {
+  padding: 10px 24px;
+  background-color: #041858;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: 500;
+  font-size: 15px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.view-more-btn:hover {
+  background-color: #041858;
+}
+.business-card.fancy {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  animation: fadeInUp 0.6s ease-in-out;
+}
+
+.business-card.fancy:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @media (max-width: 600px) {
-  .filter-form {
+  .form-group {
     flex-direction: column;
+    align-items: stretch;
+  }
+
+  .form-group input,
+  .form-group select,
+  .form-group button {
+    width: 100%;
   }
 }

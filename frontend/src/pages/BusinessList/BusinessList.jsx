@@ -11,6 +11,7 @@ const BusinessList = () => {
   });
 
   const [businesses, setBusinesses] = useState([]);
+  const [showAll, setShowAll] = useState(false); // control how many to show
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -43,79 +44,90 @@ const BusinessList = () => {
 
   const handleSearch = (e) => {
     e.preventDefault();
+    setShowAll(false); // reset when new search happens
     fetchBusinesses();
   };
 
+  const visibleBusinesses = showAll ? businesses : businesses.slice(0, 4);
+
   return (
-    <div className="business-list-container">
-      <h2>Explore Businesses</h2>
+    <div className="business-list-page" id="business-list-page">
+      <div className="business-list-container">
+        <h2 className="section-title">Explore Businesses</h2>
+        <p className="section-subtitle">
+          Connect with listed businesses. Filter by type, revenue, and location.
+        </p>
 
-      <form className="filter-form" onSubmit={handleSearch}>
-        <select name="type" value={filters.type} onChange={handleChange}>
-          <option value="">All Types</option>
-          <option value="Corporation">Corporation</option>
-          <option value="Private">Private</option>
-          <option value="Partnership">Partnership</option>
-        </select>
+        <form className="filter-form" onSubmit={handleSearch}>
+          <div className="form-group">
+            <select name="type" value={filters.type} onChange={handleChange}>
+              <option value="">All Types</option>
+              <option value="Corporation">Corporation</option>
+              <option value="Private">Private</option>
+              <option value="Partnership">Partnership</option>
+            </select>
 
-        <input
-          type="text"
-          name="location"
-          placeholder="Location"
-          value={filters.location}
-          onChange={handleChange}
-        />
+            <input
+              type="text"
+              name="location"
+              placeholder="Location"
+              value={filters.location}
+              onChange={handleChange}
+            />
+            <input
+              type="number"
+              name="minRevenue"
+              placeholder="Min Revenue"
+              value={filters.minRevenue}
+              onChange={handleChange}
+            />
+            <input
+              type="number"
+              name="cagrMin"
+              placeholder="Min CAGR"
+              value={filters.cagrMin}
+              onChange={handleChange}
+            />
+            <button type="submit">Search</button>
+          </div>
+        </form>
 
-        <input
-          type="number"
-          name="minRevenue"
-          placeholder="Min Revenue"
-          value={filters.minRevenue}
-          onChange={handleChange}
-        />
+        <div className="business-card-grid">
+          {visibleBusinesses.length === 0 ? (
+            <p>No businesses found.</p>
+          ) : (
+            visibleBusinesses.map((business) => (
+              <div className="business-card fancy" key={business._id}>
+                <img
+                  className="card-icon"
+                  src="https://cdn-icons-png.flaticon.com/512/4762/4762314.png"
+                  alt="Business Icon"
+                />
+                <h3>{business.name}</h3>
+                <p>
+                  <strong>Type:</strong> {business.businessType}
+                </p>
+                <p>
+                  <strong>Location:</strong> {business.location}
+                </p>
+                <p>
+                  <strong>Description:</strong> {business.description}
+                </p>
+                <a href={`/businesses/${business._id}`}>Read More →</a>
+              </div>
+            ))
+          )}
+        </div>
 
-        <input
-          type="number"
-          name="cagrMin"
-          placeholder="Min CAGR"
-          value={filters.cagrMin}
-          onChange={handleChange}
-        />
-
-        <button type="submit">Search</button>
-      </form>
-
-      <div className="business-card-grid">
-        {businesses.length === 0 ? (
-          <p>No businesses found matching your filters.</p>
-        ) : (
-          businesses.map((business) => (
-            <div className="business-card" key={business._id}>
-              <h3>{business.name}</h3>
-              <p>
-                <strong>Type:</strong> {business.businessType}
-              </p>
-              <p>
-                <strong>Location:</strong> {business.location}
-              </p>
-              <p>
-                <strong>Description:</strong> {business.description}
-              </p>
-              <p>
-                <strong>Total Revenue:</strong> $
-                {business.totalRevenue?.toLocaleString() || 0}
-              </p>
-              <p>
-                <strong>CAGR:</strong> {business.financials?.cagr || 0}%
-              </p>
-              <a href={`/businesses/${business._id}`}>View Profile</a>
-              {/* {error && (
-                <div className="error-message">
-                  <p>{error}</p>
-                </div>
-              )}  */}
-            </div>
-          ))
+        {businesses.length > 4 && (
+          <div className="center-btn">
+            <button
+              onClick={() => setShowAll((prev) => !prev)}
+              className="view-more-btn"
+            >
+              {showAll ? "View Less" : "View More"}
+            </button>
+          </div>
         )}
       </div>
     </div>

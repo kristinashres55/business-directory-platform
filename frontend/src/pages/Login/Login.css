@@ -64,7 +64,7 @@
 .login-title {
   text-align: center;
   margin-bottom: 20px;
-  color: #3862ae;
+  color: #041858;
 }
 
 form input {
@@ -79,7 +79,7 @@ form input {
 form button {
   width: 100%;
   padding: 12px;
-  background-color: #3862ae;
+  background-color: #041858;
   color: white;
   font-size: 16px;
   border: none;
@@ -89,7 +89,7 @@ form button {
 }
 
 form button:hover {
-  background-color: #3862ae;
+  background-color: #041858;
 }
 
 .remember-forgot {
@@ -110,7 +110,7 @@ form button:hover {
 }
 
 .remember-forgot a {
-  color: #3862ae;
+  color: #041858;
   text-decoration: none;
   font-weight: 500;
 }
@@ -126,7 +126,7 @@ form button:hover {
 }
 
 .signup-link a {
-  color: #3862ae;
+  color: #041858;
   text-decoration: none;
   font-weight: 500;
 }
