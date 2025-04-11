@@ -1,109 +1,156 @@
-.login-container {
-  min-height: 100vh;
-  background: linear-gradient(to right, #f0f8ff, #ffffff);
+.login-page {
+  height: 100vh;
+  width: 100%;
+  /* background-image: url("../../assets/login-bg.png"); */
+  background-color: #dfe6ff;
+  background-size: cover;
+  background-position: center;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 30px;
+}
+
+.login-overlay {
+  background-color: rgba(0, 0, 0, 0.2);
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+}
+
+.login-card {
+  display: flex;
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+  overflow: hidden;
+  max-width: 900px;
+  width: 90%;
+}
+
+.login-image-left {
+  flex: 1;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ffffff;
+}
+
+.login-image-left img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .login-form {
-  background-color: white;
-  padding: 40px 30px;
-  border-radius: 12px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-  width: 100%;
-  max-width: 420px;
+  flex: 1;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.user-icon {
+  width: 60px;
+  height: 60px;
+  margin: 0 auto 20px;
+  display: block;
 }
 
 .login-title {
   text-align: center;
-  color: #003366;
-  margin-bottom: 25px;
-  font-size: 1.8rem;
+  margin-bottom: 20px;
+  color: #3862ae;
 }
 
-form {
+form input {
+  width: 92%;
+  padding: 12px;
+  margin-bottom: 15px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 15px;
+}
+
+form button {
+  width: 100%;
+  padding: 12px;
+  background-color: #3862ae;
+  color: white;
+  font-size: 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+form button:hover {
+  background-color: #3862ae;
+}
+
+.remember-forgot {
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.9rem;
+  margin-top: 10px;
+  width: 100%;
+  margin-bottom: 20px;
 }
 
-label {
-  margin: 10px 0 5px;
-  font-weight: bold;
+.remember-forgot label {
+  display: flex;
+  align-items: center;
+  gap: 2px;
   color: #333;
 }
 
-.login-input {
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  font-size: 1rem;
-}
-
-.show-password-toggle {
-  display: flex;
-  align-items: center;
-  margin: 10px 0 15px;
-}
-
-.show-password-toggle label {
-  margin-left: 6px;
-  font-size: 0.9rem;
-  color: #444;
-}
-
-.login-error {
-  color: #d32f2f;
-  margin: 8px 0;
-  font-size: 0.95rem;
-  text-align: center;
-}
-
-.login-btn {
-  background-color: #007acc;
-  color: white;
-  border: none;
-  padding: 12px;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 1rem;
-  margin-top: 10px;
-  transition: background-color 0.3s ease;
-}
-
-.login-btn:hover {
-  background-color: #005fa3;
-}
-
-.login-hint {
-  margin-top: 20px;
-  text-align: center;
-  font-size: 0.95rem;
-  color: #555;
-}
-.login-hint a {
-  color: #007acc;
+.remember-forgot a {
+  color: #3862ae;
   text-decoration: none;
+  font-weight: 500;
 }
-.login-hint a:hover {
+
+.remember-forgot a:hover {
   text-decoration: underline;
 }
 
-.login-footer {
+.signup-link {
   text-align: center;
-  margin-top: 20px;
-  font-size: 0.85rem;
-  color: #777;
+  font-size: 14px;
+  margin-top: 10px;
 }
 
-.login-signup-button {
-  background-color: #007acc;
-  color: white;
-  border: none;
-  padding: 10px 20px;
+.signup-link a {
+  color: #3862ae;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.error-text,
+.success-text {
+  font-size: 14px;
+  font-weight: 500;
+  padding: 10px 15px;
+  margin-bottom: 15px;
   border-radius: 5px;
-  cursor: pointer;
-  font-size: 16px;
-  transition: background-color 0.3s ease;
+  text-align: center;
+}
+
+/* Error styling */
+.error-text {
+  background-color: #fdecea;
+  color: #c62828;
+  border: 1px solid #f5c6cb;
+}
+
+/* Success styling */
+.success-text {
+  background-color: #e6f4ea;
+  color: #2e7d32;
+  border: 1px solid #a5d6a7;
 }

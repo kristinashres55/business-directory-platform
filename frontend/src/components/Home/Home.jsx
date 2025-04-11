@@ -1,18 +1,25 @@
 import React from "react";
-import homeImage from "../../assets/homepage.jpg";
 import "./Home.css";
+import illustration from "../../assets/main.svg"; // use your own image
 
 const Home = () => {
   return (
-    <div className="homepage-image">
-      <img src={homeImage} alt="Homepage" className="homepage-image" />
-      <div className="homepage-desc">
-        <h1 className="homepage-title">Welcome to the Business Directory</h1>
-        <p className="homepage-description">
-          A platform designed to connect users with businesses and facilitate
-          financial transactions. Our directory is user-friendly and secure,
-          ensuring a seamless experience for all users.
-        </p>
+    <div className="home-container">
+      <div className="home-content">
+        <div className="home-left">
+          <h1 className="home-title">Welcome to the Business Directory</h1>
+          <p className="home-description">
+            A platform designed to connect users with businesses and facilitate
+            financial transactions. Our directory is user-friendly and secure,
+            ensuring a seamless experience for all users.
+          </p>
+          <button className="cta-button">
+            <a href="#business-list-page"> Explore more</a>
+          </button>
+        </div>
+        <div className="home-right">
+          <img src={illustration} alt="Marketing Illustration" />
+        </div>
       </div>
     </div>
   );

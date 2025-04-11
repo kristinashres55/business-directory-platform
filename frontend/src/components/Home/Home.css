@@ -1,44 +1,66 @@
-.homepage-image {
-  position: relative;
+.home-container {
   width: 100%;
-  height: 850px;
+  height: 80vh;
+  background-color: #041858;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #ffffff;
+  overflow: hidden;
+}
+
+.home-content {
+  display: flex;
+  width: 90%;
+  max-width: 1300px;
+  justify-content: space-between;
+  align-items: center;
+  gap: 70px;
+}
+
+.home-right img {
+  width: 600px;
+}
+
+.home-left {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.home-title {
+  font-size: 2.8rem;
+  font-weight: 800;
   margin-bottom: 20px;
 }
 
-.homepage-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  background: rgba(15, 15, 15, 0.6);
+.home-description {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  max-width: 500px;
+  margin-bottom: 30px;
 }
 
-.homepage-image::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5); /* Dark overlay with 50% opacity */
-  z-index: 1;
-}
-
-.homepage-desc {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+.cta-button {
+  background-color: #3fd4c7;
+  border: none;
+  padding: 12px 20px;
   color: white;
-  text-align: center;
-  z-index: 2;
+  width: 200px;
+  border-radius: 20px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s;
 }
 
-.homepage-desc h1 {
-  font-size: 3rem;
-  margin-bottom: 20px;
+.cta-button a {
+  text-decoration: none;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
 }
 
-.homepage-desc p {
-  font-size: 1.5rem;
-  margin-bottom: 20px;
+.cta-button:hover {
+  background-color: #340f6e;
 }
