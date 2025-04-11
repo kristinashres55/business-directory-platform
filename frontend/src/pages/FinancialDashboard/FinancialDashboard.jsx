@@ -14,6 +14,7 @@ import {
 } from "chart.js";
 import "./FinancialDashboard.css";
 import { useAuth } from "../../hooks/useAuth";
+import image from "../../assets/homepage.svg";
 
 ChartJS.register(
   BarElement,
@@ -88,6 +89,9 @@ export default function FinancialDashboard() {
 
   return (
     <div className="financial-dashboard">
+      <div className="financial-content">
+        <img src={image} alt="Marketing Illustration" />
+      </div>
       <h2>Financial Dashboard</h2>
 
       <div className="chart-container">
