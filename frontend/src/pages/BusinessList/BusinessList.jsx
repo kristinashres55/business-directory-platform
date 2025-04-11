@@ -23,13 +23,13 @@ const BusinessList = () => {
       const token = localStorage.getItem("token");
       const query = new URLSearchParams(filters).toString();
 
+      const config = token
+        ? { headers: { Authorization: `Bearer ${token}` } }
+        : {}; // no headers if not logged in
+
       const res = await axios.get(
         `http://localhost:5000/api/businesses/search?${query}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
+        config
       );
 
       setBusinesses(res.data);
@@ -46,6 +46,17 @@ const BusinessList = () => {
     e.preventDefault();
     setShowAll(false); // reset when new search happens
     fetchBusinesses();
+  };
+
+  const handleReset = () => {
+    setFilters({
+      type: "",
+      location: "",
+      minRevenue: "",
+      cagrMin: "",
+    });
+    setShowAll(false);
+    fetchBusinesses(); // fetch default business list
   };
 
   const visibleBusinesses = showAll ? businesses : businesses.slice(0, 4);
@@ -89,6 +100,9 @@ const BusinessList = () => {
               onChange={handleChange}
             />
             <button type="submit">Search</button>
+            <button type="button" onClick={handleReset} className="reset-btn">
+              Reset
+            </button>
           </div>
         </form>
 
