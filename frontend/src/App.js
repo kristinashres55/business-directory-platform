@@ -42,6 +42,15 @@ function App() {
         />
 
         <Route
+          path="/products"
+          element={
+            <MainLayout>
+              <Products />
+            </MainLayout>
+          }
+        />
+
+        <Route
           path="/businesses"
           element={
             <MainLayout>
