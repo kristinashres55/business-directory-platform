@@ -25,7 +25,8 @@ function App() {
           element={
             <MainLayout>
               <Home />
-              <Main />
+              <BusinessList />
+              {/* <Main /> */}
             </MainLayout>
           }
         />
