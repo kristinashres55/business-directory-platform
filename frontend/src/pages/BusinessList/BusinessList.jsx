@@ -18,10 +18,10 @@ const BusinessList = () => {
     setFilters((prev) => ({ ...prev, [name]: value }));
   };
 
-  const fetchBusinesses = async () => {
+  const fetchBusinesses = async (customFilters = filters) => {
     try {
       const token = localStorage.getItem("token");
-      const query = new URLSearchParams(filters).toString();
+      const query = new URLSearchParams(customFilters).toString();
 
       const config = token
         ? { headers: { Authorization: `Bearer ${token}` } }
@@ -49,14 +49,16 @@ const BusinessList = () => {
   };
 
   const handleReset = () => {
-    setFilters({
+    const resetFilters = {
       type: "",
       location: "",
       minRevenue: "",
       cagrMin: "",
-    });
+    };
+
+    setFilters(resetFilters);
     setShowAll(false);
-    fetchBusinesses(); // fetch default business list
+    fetchBusinesses(resetFilters);
   };
 
   const visibleBusinesses = showAll ? businesses : businesses.slice(0, 4);
