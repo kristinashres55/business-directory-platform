@@ -71,6 +71,25 @@ const BusinessProfile = () => {
 
   return (
     <div className="business-profile">
+      <div className="profile-banner">
+        <img
+          src="https://cdn-icons-png.flaticon.com/512/1995/1995515.png"
+          alt="Business Avatar"
+          className="business-avatar"
+        />
+        <h2>
+          {isEditing ? (
+            <input
+              name="name"
+              value={formData.name}
+              onChange={handleInputChange}
+            />
+          ) : (
+            business.name
+          )}
+        </h2>
+        <p className="type-tag">{business.businessType}</p>
+      </div>
       <div className="profile-card">
         <h2>
           {isEditing ? (
