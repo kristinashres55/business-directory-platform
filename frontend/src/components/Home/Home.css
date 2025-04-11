@@ -6,6 +6,7 @@
   justify-content: center;
   align-items: center;
   color: #ffffff;
+  border-radius: 0 0 250px 0px;
   overflow: hidden;
 }
 
