@@ -10,6 +10,7 @@ import BusinessProfile from "./pages/BusinessProfile/BusinessProfile";
 import MainLayout from "./layouts/MainLayout";
 import FinancialDashboard from "./pages/FinancialDashboard/FinancialDashboard";
 import BusinessList from "./pages/BusinessList/BusinessList";
+import Products from "./pages/Products/Products";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
             <MainLayout>
               <Home />
               <BusinessList />
+              <Products />
               {/* <Main /> */}
             </MainLayout>
           }
