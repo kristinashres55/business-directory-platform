@@ -173,12 +173,12 @@
 .view-more-btn {
   margin: 20px;
   padding: 10px 24px;
-  background-color: #041858;
+  background: linear-gradient(to right, #041858, #0f2a60, #1c3b80);
   color: white;
   border: none;
   border-radius: 6px;
-  font-weight: 500;
-  font-size: 15px;
+  font-weight: bold;
+  /* font-size: 15px; */
   cursor: pointer;
   transition: 0.3s;
 }
