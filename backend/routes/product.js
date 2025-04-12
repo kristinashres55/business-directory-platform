@@ -9,6 +9,11 @@ const router = express.Router();
 
 router.post("/", protect, businessOnly, createProduct);
 router.get("/", getAllProducts);
-router.get("/:businessId", getProductsByBusiness);
+router.get(
+  "/business/:businessId",
+  protect,
+  businessOnly,
+  getProductsByBusiness
+); // for businesses
 
 module.exports = router;

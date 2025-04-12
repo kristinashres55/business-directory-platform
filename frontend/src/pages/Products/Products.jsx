@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { useLocation, useNavigate } from "react-router-dom";
 import "./Products.css";
 
 const Products = () => {
   const [products, setProducts] = useState([]);
   const [error, setError] = useState("");
+  const location = useLocation();
+  const navigate = useNavigate();
+  const isLandingPage = location.pathname === "/";
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -23,6 +27,20 @@ const Products = () => {
     fetchProducts();
   }, []);
 
+  const handleDelete = async (id) => {
+    try {
+      const token = localStorage.getItem("token");
+      await axios.delete(`http://localhost:5000/api/products/${id}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      setProducts(products.filter((p) => p._id !== id));
+    } catch (err) {
+      console.error("Delete failed:", err);
+    }
+  };
+
+  const visibleProducts = isLandingPage ? products.slice(0, 4) : products;
+
   return (
     <div className="products-main">
       <div className="products-page">
@@ -30,11 +48,11 @@ const Products = () => {
 
         {error && <p className="error-msg">{error}</p>}
 
-        {products.length === 0 ? (
-          <p>You haven't added any products yet.</p>
+        {visibleProducts.length === 0 ? (
+          <p>No products to display.</p>
         ) : (
           <div className="products-grid">
-            {products.map((product) => (
+            {visibleProducts.map((product) => (
               <div className="product-card" key={product._id}>
                 <img
                   src="https://cdn-icons-png.flaticon.com/512/7963/7963556.png"
@@ -50,10 +68,38 @@ const Products = () => {
                   <strong>Available:</strong>{" "}
                   {product.availability ? "Yes" : "No"}
                 </p>
+
+                {!isLandingPage && (
+                  <div className="product-buttons">
+                    <button className="edit-btn">Edit</button>
+                    <button
+                      className="delete-btn"
+                      onClick={() => handleDelete(product._id)}
+                    >
+                      Delete
+                    </button>
+                  </div>
+                )}
               </div>
             ))}
           </div>
         )}
+
+        {/* Bottom Button */}
+        <div className="center-btn">
+          {isLandingPage ? (
+            <button className="view-more" onClick={() => navigate("/products")}>
+              View More
+            </button>
+          ) : (
+            <button
+              className="add-btn"
+              onClick={() => alert("Open Add Product Modal")}
+            >
+              + Add Product
+            </button>
+          )}
+        </div>
       </div>
     </div>
   );

@@ -73,3 +73,80 @@
 .product-card strong {
   color: #fff;
 }
+
+.product-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.view-more {
+  background-color: #3fd4c7;
+  color: white;
+  border-radius: 10px;
+  border: none;
+  padding: 10px 20px;
+}
+
+.view-more:hover {
+  background-color: #3fd4c7;
+  color: white;
+}
+
+.edit-btn,
+.delete-btn,
+.add-btn {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 4px;
+  font-weight: bold;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.edit-btn {
+  background-color: #007bff;
+  color: white;
+}
+
+.delete-btn {
+  background-color: #dc3545;
+  color: white;
+}
+
+.add-btn {
+  background-color: #28a745;
+  color: white;
+  padding: 10px 20px;
+}
+
+.add-btn:hover {
+  background-color: #218838;
+}
+
+.product-actions {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.edit-btn,
+.delete-btn {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.edit-btn {
+  background-color: #007bff;
+  color: white;
+}
+
+.delete-btn {
+  background-color: #dc3545;
+  color: white;
+}
