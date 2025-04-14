@@ -1,0 +1,19 @@
+.dashboard-layout {
+    display: flex;
+    min-height: 100vh;
+    background-color: #f8f9fc;
+  }
+  
+  .main-content-area {
+    flex-grow: 1;
+    margin-left: 240px; /* Match the sidebar width */
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .dashboard-content {
+    padding: 20px;
+    min-height: calc(100vh - 60px); /* Adjust if navbar is taller/shorter */
+    background-color: #f5f6fa;
+  }
+  

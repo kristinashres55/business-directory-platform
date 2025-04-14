@@ -1,81 +1,95 @@
 .navbar {
   background-color: #041858;
-  overflow: hidden;
+  color: white;
+  padding: 1rem 2rem;
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  justify-content: space-around;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
 
 .navbar-logo {
-  float: left;
-  display: block;
-  color: #f2f2f2;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-  font-size: 20px;
-  font-weight: 600;
-  text-decoration: none;
+  font-size: 1.5rem;
+  font-weight: bold;
   cursor: pointer;
-}
-
-.navbar-links {
-  display: flex;
-  align-items: center;
-}
-
-.navbar-links li {
-  display: flex;
-  list-style-type: none;
-  cursor: pointer;
-  text-transform: uppercase;
-  margin: 0;
-  padding: 0;
-}
-
-.navbar-links li a {
-  display: block;
-  color: #f2f2f2;
-  text-align: center;
-  padding: 14px 16px;
-  font-weight: 600;
-  text-decoration: none;
-  list-style-type: none;
-  font-size: 18px;
-  margin: 0 10px;
-  transition: background-color 0.3s;
-}
-
-.navbar-links a:hover {
-  color: #3fd4c7;
-  font-size: 18px;
-  font-weight: 900;
-}
-
-.navbar-links .active {
-  color: #007acc;
-}
-
-.navbar-actions {
-  display: flex;
-  align-items: center;
-
-  margin-right: 20px;
-  gap: 20px;
-}
-
-.navbar-actions button {
-  background-color: #3fd4c7;
   color: white;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 20px;
-  font-size: 16px;
-  font-weight: 400;
-  cursor: pointer;
-  transition: background-color 0.3s;
 }
 
-.navbar-actions button:hover {
-  background-color: #3fd4c7;
+.navbar-right {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.profile-dropdown {
+  position: relative;
+}
+
+.profile-icon {
+  width: 40px;
+  height: 40px;
+  background-color: #ffffff;
+  color: #041858;
+  font-weight: bold;
+  font-size: 18px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.dropdown-content {
+  position: absolute;
+  top: 48px;
+  right: 0;
+  background: #ffffff;
+  color: #333;
+  border-radius: 6px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+  width: 220px;
+  padding: 1rem;
+  z-index: 100;
+}
+
+.user-details {
+  margin-bottom: 10px;
+  text-align: left;
+}
+
+.user-details strong {
+  font-size: 16px;
+  display: block;
+}
+
+.user-details p {
+  font-size: 14px;
+  margin: 2px 0;
+}
+
+.user-details span {
+  font-size: 12px;
+  color: #666;
+}
+
+.dropdown-btn {
+  width: 100%;
+  background: #041858;
+  color: white;
+  padding: 8px 10px;
+  border: none;
+  border-radius: 5px;
+  margin-top: 6px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.dropdown-btn.logout {
+  background-color: #e63946;
+}
+
+.dropdown-btn:hover {
+  background-color: #0a2a80;
 }

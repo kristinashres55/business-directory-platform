@@ -1,28 +1,27 @@
-import logo from "./logo.svg";
 import "./App.css";
 import Home from "./components/Home/Home";
 import Login from "./pages/Login/Login";
-import Navbar from "./components/Navbar/Navbar";
-import Main from "./components/Main/Main";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Register from "./pages/Register/Register";
 import BusinessProfile from "./pages/BusinessProfile/BusinessProfile";
-import MainLayout from "./layouts/MainLayout";
 import FinancialDashboard from "./pages/FinancialDashboard/FinancialDashboard";
 import BusinessList from "./pages/BusinessList/BusinessList";
 import Products from "./pages/Products/Products";
 import Contact from "./pages/Contact/Contact";
 import Footer from "./pages/Footer/Footer";
+import MainLayout from "./layouts/MainLayout";
+import DashboardLayout from "./layouts/DashboardLayout";
+
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 function App() {
   return (
     <Router>
       <Routes>
-        {/* Routes without Navbar */}
+        {/* Routes without layout */}
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
 
-        {/* All routes with Navbar */}
+        {/* Public layout */}
         <Route
           path="/"
           element={
@@ -32,42 +31,49 @@ function App() {
               <Products />
               <Contact />
               <Footer />
-              {/* <Main /> */}
-            </MainLayout>
-          }
-        />
-        <Route
-          path="/businesses/:id"
-          element={
-            <MainLayout>
-              <BusinessProfile />
             </MainLayout>
           }
         />
 
-        <Route
-          path="/products"
-          element={
-            <MainLayout>
-              <Products />
-            </MainLayout>
-          }
-        />
-
+        {/* Dashboard layout */}
         <Route
           path="/businesses"
           element={
-            <MainLayout>
+            <DashboardLayout>
               <BusinessList />
-            </MainLayout>
+            </DashboardLayout>
+          }
+        />
+        <Route
+          path="/products"
+          element={
+            <DashboardLayout>
+              <Products />
+            </DashboardLayout>
           }
         />
         <Route
           path="/financials"
           element={
-            <MainLayout>
+            <DashboardLayout>
               <FinancialDashboard />
-            </MainLayout>
+            </DashboardLayout>
+          }
+        />
+        <Route
+          path="/businesses/:id"
+          element={
+            <DashboardLayout>
+              <BusinessProfile />
+            </DashboardLayout>
+          }
+        />
+        <Route
+          path="/user/profile"
+          element={
+            <DashboardLayout>
+              <BusinessProfile />
+            </DashboardLayout>
           }
         />
       </Routes>
