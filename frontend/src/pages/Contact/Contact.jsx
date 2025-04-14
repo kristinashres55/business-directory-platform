@@ -27,7 +27,8 @@ const Contact = () => {
       {/* <h5 className="contact-subheading">Contact us</h5> */}
       <h2 className="contact-heading">Get In Touch!</h2>
       <p className="contact-description">
-        The contact form is currently inactive.
+        For any queries or feedback, feel free to reach out to us. We are here
+        to help you!
       </p>
 
       <form className="contact-form" onSubmit={handleSubmit}>
