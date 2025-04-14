@@ -12,6 +12,7 @@ import FinancialDashboard from "./pages/FinancialDashboard/FinancialDashboard";
 import BusinessList from "./pages/BusinessList/BusinessList";
 import Products from "./pages/Products/Products";
 import Contact from "./pages/Contact/Contact";
+import Footer from "./pages/Footer/Footer";
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
               <BusinessList />
               <Products />
               <Contact />
+              <Footer />
               {/* <Main /> */}
             </MainLayout>
           }
