@@ -16,7 +16,15 @@ const Sidebar = () => {
           <Link to="/businesses">Browse Businesses</Link>
         </li>
         <li>
-          <Link to="/products">Products</Link>
+        {user?.role === "business" ? (
+  
+    <Link to="/products">My Products</Link>
+  
+) : (
+  
+    <Link to="/products">Products</Link>
+  
+)}
         </li>
         {user?.role === "business" && (
           <>

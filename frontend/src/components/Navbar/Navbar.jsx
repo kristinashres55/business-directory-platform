@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import "./Navbar.css";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
-
+import { Link } from "react-router-dom";
 const Navbar = () => {
   const { user, token } = useAuth();
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -63,9 +63,9 @@ const Navbar = () => {
                   <span>{user.role}</span>
                 </div>
                 <hr />
-                <button className="dropdown-btn" onClick={handleProfile}>
-                  Profile
-                </button>
+                <Link to={user?.role === "business" ? `/businesses/${user._id}` : `/users/${user._id}`}>
+  <button className="dropdown-btn">Profile</button>
+</Link>
                 <button className="dropdown-btn logout" onClick={handleLogout}>
                   Logout
                 </button>

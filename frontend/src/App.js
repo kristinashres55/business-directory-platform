@@ -10,6 +10,8 @@ import Contact from "./pages/Contact/Contact";
 import Footer from "./pages/Footer/Footer";
 import MainLayout from "./layouts/MainLayout";
 import DashboardLayout from "./layouts/DashboardLayout";
+import UserProfile from "./pages/UserProfile/UserProfile";
+
 
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
@@ -76,7 +78,17 @@ function App() {
             </DashboardLayout>
           }
         />
+        <Route
+  path="/users/:id"
+  element={
+    <MainLayout>
+      <UserProfile />
+    </MainLayout>
+  }
+/>
+
       </Routes>
+      
     </Router>
   );
 }
