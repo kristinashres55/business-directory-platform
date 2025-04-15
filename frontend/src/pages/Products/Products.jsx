@@ -222,7 +222,7 @@ const Products = () => {
               onChange={handleChange}
             />
             <label>
-              <input
+              <input class="checkbox-input"
                 type="checkbox"
                 name="availability"
                 checked={formData.availability}
@@ -264,7 +264,7 @@ const Products = () => {
               onChange={handleChange}
             />
             <label>
-              <input
+              <input class="checkbox-input"
                 type="checkbox"
                 name="availability"
                 checked={formData.availability}

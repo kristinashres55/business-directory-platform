@@ -1,5 +1,6 @@
 .products-page {
   padding: 2rem;
+  background: #f9f9fb;
   max-width: 1200px;
   margin: auto;
 }
@@ -7,104 +8,7 @@
 .products-title {
   text-align: center;
   font-size: 2rem;
-  color: #041858;
   margin-bottom: 1.5rem;
-}
-
-.add-product-btn {
-  text-align: right;
-  margin-bottom: 20px;
-}
-
-.add-product-btn button {
-  padding: 10px 16px;
-  background-color: #041858;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-weight: 500;
-}
-
-.product-form {
-  background-color: #f9f9f9;
-  padding: 15px;
-  border-radius: 10px;
-  margin-bottom: 2rem;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.product-form input,
-.product-form textarea {
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
-
-.product-form button {
-  background-color: #041858;
-  color: white;
-  padding: 10px;
-  border: none;
-  border-radius: 5px;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-.products-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  gap: 20px;
-}
-
-.product-card {
-  background: #fff;
-  border-radius: 12px;
-  padding: 20px;
-  border: 1px solid #e0e0e0;
-  text-align: center;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-  transition: 0.3s ease;
-  position: relative;
-}
-
-.product-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
-}
-
-.product-icon {
-  width: 40px;
-  margin-bottom: 10px;
-}
-
-.product-actions {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  margin-top: 12px;
-  font-size: 1.1rem;
-  color: #041858;
-  cursor: pointer;
-}
-
-.business-ref {
-  margin-top: 8px;
-  font-size: 13px;
-  color: #777;
-}
-
-.products-page {
-  padding: 2rem;
-  background: #f5f8ff;
-}
-
-.products-title {
-  text-align: center;
-  font-size: 2rem;
-  margin-bottom: 20px;
   color: #041858;
 }
 
@@ -113,64 +17,115 @@
   color: white;
   padding: 10px 20px;
   border: none;
-  margin: 10px 10px 20px;
+  border-radius: 4px;
   display: block;
-  border-radius: 5px;
+  margin: 0 auto 2rem;
+  font-weight: 500;
   cursor: pointer;
+}
+
+.add-btn:hover {
+  background-color: #06327d;
 }
 
 .products-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: 20px;
 }
 
 .product-card {
-  background: white;
-  padding: 15px;
-  border-radius: 10px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-  position: relative;
-}
-
-.product-icon {
-  width: 50px;
-  margin-bottom: 10px;
-}
-
-.products-header {
+  background: #ffffff;
+  border: 1px solid #e3e7f0;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: none;
+  transition: box-shadow 0.3s ease, transform 0.2s ease;
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
-  align-items: center;
-  height: 4rem;
+  min-height: 250px;
+}
+
+.product-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  transform: translateY(-3px);
+}
+
+.card-header {
+  font-weight: 600;
+  font-size: 16px;
+  margin-bottom: 10px;
+  color: #041858;
+}
+
+.product-card p {
+  font-size: 14px;
+  color: #444;
+  margin: 4px 0;
+}
+
+.business-ref {
+  font-size: 13px;
+  color: #666;
+  margin-top: 10px;
+}
+
+.message-btn {
+  margin-top: 10px;
+  padding: 8px 12px;
+  background-color: #041858;
+  color: white;
+  font-size: 14px;
+  font-weight: 500;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  align-self: start;
+}
+
+.message-btn:hover {
+  background-color: #06327d;
+}
+
+.product-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 10px;
 }
 
 .product-actions button {
-  background: transparent;
+  background: none;
   border: none;
-  font-size: 18px;
-  margin-left: 5px;
+  font-size: 16px;
   cursor: pointer;
+  color: #041858;
 }
 
 .modal-overlay {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0,0,0,0.4);
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 1000;
 }
 
 .modal {
   background: white;
   padding: 2rem;
-  width: 350px;
-  border-radius: 10px;
-  box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+  border-radius: 8px;
+  width: 90%;
+  max-width: 400px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+}
+
+.modal h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+  color: #041858;
 }
 
 .modal input,
@@ -178,71 +133,34 @@
   width: 100%;
   padding: 10px;
   margin-bottom: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
 }
 
 .modal-buttons {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
+  gap: 10px;
 }
 
-.message-btn {
-  margin-top: 10px;
+.modal-buttons button {
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.modal-buttons button:first-child {
   background-color: #041858;
   color: white;
-  padding: 8px 16px;
-  border: none;
-  border-radius: 5px;
-  font-weight: 500;
-  font-size: 14px;
-  cursor: pointer;
-  transition: 0.3s;
 }
 
-.message-btn:hover {
-  background-color: #06327d;
-}
-.product-card.styled {
-  padding: 24px;
-  border: 1px solid #dce3f2;
-  background: linear-gradient(135deg, #ffffff, #f3f6ff);
-  border-radius: 12px;
-  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.06);
-  transition: all 0.3s ease;
-  position: relative;
+.modal-buttons button:last-child {
+  background-color: #ccc;
 }
 
-.product-card.styled:hover {
-  transform: scale(1.03);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+.checkbox-input{
+  width: 20px !important;
 }
-
-.product-card.styled h3 {
-  font-size: 1.2rem;
-  font-weight: bold;
-  color: #041858;
-  margin-bottom: 10px;
-}
-
-.product-description {
-  font-size: 0.95rem;
-  color: #555;
-  margin-bottom: 12px;
-}
-
-.message-btn {
-  margin-top: 10px;
-  background-color: #041858;
-  color: white;
-  padding: 8px 16px;
-  border: none;
-  border-radius: 5px;
-  font-weight: 500;
-  font-size: 14px;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-.message-btn:hover {
-  background-color: #2a3b8e;
-}
-
