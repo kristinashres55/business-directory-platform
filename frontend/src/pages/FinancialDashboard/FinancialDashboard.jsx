@@ -89,9 +89,9 @@ export default function FinancialDashboard() {
 
   return (
     <div className="financial-dashboard">
-      <div className="financial-content">
+      {/* <div className="financial-content">
         <img src={image} alt="Marketing Illustration" />
-      </div>
+      </div> */}
       <h2>Financial Dashboard</h2>
 
       <div className="chart-container">

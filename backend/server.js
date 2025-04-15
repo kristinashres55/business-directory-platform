@@ -13,14 +13,18 @@ const authRoutes = require("./routes/auth");
 const businessRoutes = require("./routes/businessRoutes");
 const productRoutes = require("./routes/product");
 const financialRoutes = require("./routes/financial");
-const messageRoutes = require("./routes/message");
+const messageRoutes = require("./routes/messageRoutes");
+const userRoutes = require('./routes/userRoutes');
+
 
 // Routes
 app.use("/api/auth", authRoutes);
+app.use('/api/users', userRoutes);
 app.use("/api/businesses", businessRoutes);
 app.use("/api/products", productRoutes);
 app.use("/api/financials", financialRoutes);
 app.use("/api/messages", messageRoutes);
+
 
 // Connect to MongoDB
 mongoose

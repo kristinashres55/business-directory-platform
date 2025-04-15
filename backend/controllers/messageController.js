@@ -1,41 +1,60 @@
 const Message = require("../models/Message");
+const User = require("../models/User");
 
 exports.sendMessage = async (req, res) => {
+  const { receiver, content } = req.body;
   try {
-    const { receiver, content } = req.body;
-
-    if (!receiver || !content) {
-      return res
-        .status(400)
-        .json({ message: "Receiver and content are required" });
-    }
-
     const message = await Message.create({
       sender: req.user._id,
       receiver,
       content,
+      timestamp: new Date(),
     });
-
-    res.status(201).json({
-      message: "Message sent successfully",
-      data: message,
-    });
-  } catch (error) {
-    res.status(500).json({ message: error.message });
+    res.status(201).json(message);
+  } catch (err) {
+    res.status(500).json({ message: "Failed to send message" });
   }
 };
 
-exports.getMessages = async (req, res) => {
+exports.getConversations = async (req, res) => {
+  try {
+    const userId = req.user._id;
+    const messages = await Message.find({
+      $or: [{ sender: userId }, { receiver: userId }],
+    });
+
+    const userIds = [
+      ...new Set(
+        messages.map((msg) =>
+          msg.sender.toString() === userId.toString()
+            ? msg.receiver.toString()
+            : msg.sender.toString()
+        )
+      ),
+    ];
+
+    const users = await User.find({ _id: { $in: userIds } }).select("name email");
+
+    res.json(users);
+  } catch (err) {
+    res.status(500).json({ message: "Failed to get conversations" });
+  }
+};
+
+exports.getMessagesWithUser = async (req, res) => {
+  const userId = req.user._id;
+  const otherUserId = req.params.userId;
+
   try {
     const messages = await Message.find({
-      $or: [{ sender: req.user._id }, { receiver: req.user._id }],
-    })
-      .populate("sender", "name email role")
-      .populate("receiver", "name email role")
-      .sort({ createdAt: -1 });
+      $or: [
+        { sender: userId, receiver: otherUserId },
+        { sender: otherUserId, receiver: userId },
+      ],
+    }).sort({ timestamp: 1 });
 
     res.json(messages);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
+  } catch (err) {
+    res.status(500).json({ message: "Failed to get messages" });
   }
 };

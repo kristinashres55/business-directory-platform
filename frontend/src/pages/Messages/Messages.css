@@ -1,0 +1,139 @@
+.messages-page {
+    display: flex;
+    height: calc(100vh - 80px);
+    background-color: #f0f4ff;
+    font-family: 'Segoe UI', sans-serif;
+  }
+  
+  /* Left Sidebar */
+  .conversations {
+    width: 280px;
+    background-color: #041858;
+    color: white;
+    padding: 20px;
+    overflow-y: auto;
+  }
+  
+  .conversations h3 {
+    font-size: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .conversation-item {
+    display: flex;
+    gap: 10px;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #06206f;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.2s ease;
+  }
+  
+  .conversation-item.active,
+  .conversation-item:hover {
+    background-color: #0a2b93;
+  }
+  
+  .avatar {
+    background-color: #ffffff;
+    color: #041858;
+    width: 36px;
+    height: 36px;
+    font-size: 16px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+  }
+  
+  .conversation-item p {
+    margin: 0;
+    font-size: 14px;
+  }
+  
+  .email {
+    font-size: 12px;
+    color: #dcdcdc;
+  }
+  
+  /* Right Chatbox */
+  .chatbox {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background-color: #ffffff;
+    border-left: 1px solid #dce3f2;
+  }
+  
+  .messages {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .msg {
+    max-width: 70%;
+    padding: 10px 15px;
+    border-radius: 20px;
+    font-size: 14px;
+    line-height: 1.4;
+    word-wrap: break-word;
+  }
+  
+  .sent {
+    align-self: flex-end;
+    background-color: #041858;
+    color: white;
+    border-bottom-right-radius: 2px;
+  }
+  
+  .received {
+    align-self: flex-start;
+    background-color: #e8efff;
+    color: #041858;
+    border-bottom-left-radius: 2px;
+  }
+  
+  .input-area {
+    display: flex;
+    padding: 15px 20px;
+    border-top: 1px solid #dce3f2;
+    background-color: #f9fbff;
+  }
+  
+  .input-area input {
+    flex: 1;
+    padding: 10px 15px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    font-size: 14px;
+    outline: none;
+  }
+  
+  .input-area button {
+    background-color: #041858;
+    color: white;
+    padding: 10px 20px;
+    margin-left: 10px;
+    border: none;
+    border-radius: 20px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: 0.3s ease;
+  }
+  
+  .input-area button:hover {
+    background-color: #062a91;
+  }
+  
+  .no-chat {
+    margin: auto;
+    font-size: 16px;
+    color: #888;
+  }
+  

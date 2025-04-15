@@ -8,6 +8,8 @@ const Products = () => {
   const [showAddModal, setShowAddModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
   const [currentProduct, setCurrentProduct] = useState(null);
+  const [showMessageModal, setShowMessageModal] = useState(null);
+  const [messageText, setMessageText] = useState("");
 
   const [formData, setFormData] = useState({
     name: "",
@@ -104,6 +106,26 @@ const Products = () => {
     setShowEditModal(true);
   };
 
+  const sendMessage = async (receiverId) => {
+    if (!messageText.trim()) return;
+    try {
+      const token = localStorage.getItem("token");
+      await axios.post(
+        "http://localhost:5000/api/messages",
+        {
+          receiver: receiverId,
+          content: messageText,
+        },
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+      alert("Message sent!");
+      setShowMessageModal(null);
+      setMessageText("");
+    } catch (err) {
+      console.error("Message send failed:", err);
+    }
+  };
+
   return (
     <div className="products-page">
       <h2 className="products-title">
@@ -119,36 +141,57 @@ const Products = () => {
       <div className="products-grid">
         {products.map((product) => (
           <div className="product-card" key={product._id}>
-            <div className="card-header">
-              <h3>{product.name}</h3>
-            </div>
-            <hr style={{opacity: 0.4}} />
-            <div className="card-body">
-              <p style={{height: 60+"px"}}>{product.description}</p>
-              <p>
-                <strong>Price:</strong> ${product.price}
-              </p>
-              <p>
-                <strong>Available:</strong>{" "}
-                {product.availability ? "Yes" : "No"}
-              </p>
+            <div className="card-header">{product.name}</div>
+            <p>{product.description}</p>
+            <p>
+              <strong>Price:</strong> ${product.price}
+            </p>
+            <p>
+              <strong>Available:</strong> {product.availability ? "Yes" : "No"}
+            </p>
 
-              {user?.role === "general" && product.business?.name && (
-                <>
-                  <p className="business-ref">
-                    <strong>Business:</strong> {product.business.name}
-                  </p>
-                  <button className="message-btn">Message Business</button>
-                </>
-              )}
+            {user?.role === "general" && product.business?.name && (
+              <>
+                <p className="business-ref">
+                  <strong>Business:</strong> {product.business.name}
+                </p>
+                <button
+                  className="message-btn"
+                  onClick={() => setShowMessageModal(product._id)}
+                >
+                  Send Message
+                </button>
+              </>
+            )}
 
-              {user?.role === "business" && user._id === product.business && (
+            {user?.role === "business" &&
+              user._id === product.business && (
                 <div className="product-actions">
                   <button onClick={() => openEditModal(product)}>✏️</button>
                   <button onClick={() => handleDelete(product._id)}>🗑️</button>
                 </div>
               )}
-            </div>
+
+            {showMessageModal === product._id && (
+              <div className="modal-overlay">
+                <div className="modal">
+                  <h3>Send Message</h3>
+                  <textarea
+                    placeholder="Type your message..."
+                    value={messageText}
+                    onChange={(e) => setMessageText(e.target.value)}
+                  />
+                  <div className="modal-buttons">
+                    <button onClick={() => sendMessage(product.business._id)}>
+                      Send
+                    </button>
+                    <button onClick={() => setShowMessageModal(null)}>
+                      Cancel
+                    </button>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
         ))}
       </div>

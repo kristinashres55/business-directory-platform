@@ -10,8 +10,12 @@ const BusinessProfile = () => {
   const [error, setError] = useState("");
   const [isEditing, setIsEditing] = useState(false);
   const [formData, setFormData] = useState({});
+  const [currentUser, setCurrentUser] = useState(null);
 
   useEffect(() => {
+    const user = JSON.parse(localStorage.getItem("user"));
+    setCurrentUser(user);
+
     const fetchBusiness = async () => {
       try {
         const token = localStorage.getItem("token");
@@ -31,7 +35,9 @@ const BusinessProfile = () => {
 
     const fetchProducts = async () => {
       try {
-        const res = await axios.get(`http://localhost:5000/api/products/${id}`);
+        const res = await axios.get(
+          `http://localhost:5000/api/products/${id}`
+        );
         setProducts(res.data);
       } catch (err) {
         console.error("Failed to fetch products:", err);
@@ -65,6 +71,8 @@ const BusinessProfile = () => {
     }
   };
 
+  const isOwnProfile = currentUser && currentUser._id === id;
+
   if (error)
     return <div style={{ padding: "2rem", color: "red" }}>{error}</div>;
   if (!business) return <div style={{ padding: "2rem" }}>Loading...</div>;
@@ -90,19 +98,9 @@ const BusinessProfile = () => {
         </h2>
         <p className="type-tag">{business.businessType}</p>
       </div>
-      <div className="profile-card">
-        <h2>
-          {isEditing ? (
-            <input
-              name="name"
-              value={formData.name}
-              onChange={handleInputChange}
-            />
-          ) : (
-            business.name
-          )}
-        </h2>
 
+      <div className="profile-card">
+        <h2>{business.name}</h2>
         <p>
           <strong>Type:</strong>{" "}
           {isEditing ? (
@@ -140,14 +138,15 @@ const BusinessProfile = () => {
           )}
         </p>
 
-        {isEditing ? (
-          <>
-            <button onClick={handleUpdate}>Save</button>
-            <button onClick={() => setIsEditing(false)}>Cancel</button>
-          </>
-        ) : (
-          <button onClick={() => setIsEditing(true)}>Edit Profile</button>
-        )}
+        {isOwnProfile &&
+          (isEditing ? (
+            <div style={{ alignItems: "center", margin: "1rem" }}>
+              <button onClick={handleUpdate}>Save</button>
+              <button onClick={() => setIsEditing(false)}>Cancel</button>
+            </div>
+          ) : (
+            <button style={{alignSelf:"center"}} onClick={() => setIsEditing(true)}>Edit Profile</button>
+          ))}
 
         <h3>Offerings</h3>
         {products.length > 0 ? (

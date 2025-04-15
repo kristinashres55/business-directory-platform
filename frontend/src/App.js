@@ -11,6 +11,7 @@ import Footer from "./pages/Footer/Footer";
 import MainLayout from "./layouts/MainLayout";
 import DashboardLayout from "./layouts/DashboardLayout";
 import UserProfile from "./pages/UserProfile/UserProfile";
+import Messages from "./pages/Messages/Messages";
 
 
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
@@ -78,12 +79,21 @@ function App() {
             </DashboardLayout>
           }
         />
-        <Route
+       <Route
   path="/users/:id"
   element={
-    <MainLayout>
+    <DashboardLayout>
       <UserProfile />
-    </MainLayout>
+    </DashboardLayout>
+  }
+/>
+
+<Route
+  path="/messages"
+  element={
+    <DashboardLayout>
+      <Messages />
+    </DashboardLayout>
   }
 />
 

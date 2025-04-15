@@ -36,11 +36,11 @@ const Sidebar = () => {
             </li>
           </>
         )}
-        {user?.role === "general" && (
+        
           <li>
             <Link to="/messages">Messages</Link>
           </li>
-        )}
+      
         <li>
           <Link to="/contact">Contact</Link>
         </li>

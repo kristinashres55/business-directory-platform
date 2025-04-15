@@ -113,7 +113,7 @@
   color: white;
   padding: 10px 20px;
   border: none;
-  margin: 10px auto 20px;
+  margin: 10px 10px 20px;
   display: block;
   border-radius: 5px;
   cursor: pointer;
@@ -138,10 +138,11 @@
   margin-bottom: 10px;
 }
 
-.product-actions {
-  position: absolute;
-  top: 10px;
-  right: 10px;
+.products-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 4rem;
 }
 
 .product-actions button {
@@ -228,4 +229,20 @@
   margin-bottom: 12px;
 }
 
+.message-btn {
+  margin-top: 10px;
+  background-color: #041858;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 5px;
+  font-weight: 500;
+  font-size: 14px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.message-btn:hover {
+  background-color: #2a3b8e;
+}
 
